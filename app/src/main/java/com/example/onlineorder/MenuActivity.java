@@ -1,39 +1,70 @@
 package com.example.onlineorder;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+public class MenuActivity extends AppCompatActivity {
+    ConstraintLayout outside_menu, inside_menu;
+    int y;
+    int y_bottom;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.menu_activity);
+        outside_menu=(ConstraintLayout) findViewById(R.id.outside_menu);
+        inside_menu=(ConstraintLayout) findViewById(R.id.inside_menu);
 
 
-public class MenuActivity  extends Activity {
+        outside_menu.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v,MotionEvent event) {
+
+                y = (int)inside_menu.getY();
+
+                y_bottom = y + (inside_menu).getHeight();
+                if((int)event.getY() < y || (int)event.getY() > y_bottom)//&& (int)event.getY() < y_bottom
+                {
+                    onBackPressed();
+                    overridePendingTransition(0,0);
+                    System.out.println("--" + event.getY());
+
+                }
+                return  true;
+            }
+            ;
+
+
+
+        });
+//toolbar gradient
+        getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        );
+    }
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.menu.custom_navigation_view);
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-
-        //Ndrysho 8 ose 7 per te ndryshu madhesine
-        getWindow().setLayout((int)(width*.8), (int)(height*.7));
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.gravity = Gravity.RIGHT;
-        params.x = 50; //margin per x
-        params.y = -100;//margin per y
-        getWindow().setAttributes(params);
-
-    }
-
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0,0);
     }
 
 
 
 
 
+}
