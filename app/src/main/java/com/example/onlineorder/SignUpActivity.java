@@ -73,6 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
         protected void onPreExecute()
         {
             super.onPreExecute();
+            System.out.println("dsfdsfdg");
             str_username = username.getText().toString();
             str_password = userpassword.getText().toString();
         }
