@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/contentView"
+    tools:context=".SignupActivity">
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/pageHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="BuySmart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/loginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_below="@id/textView2"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:text="Sign Up"
+        android:layout_centerHorizontal = "true"
+
+
+        />
+
+    <RelativeLayout
+        android:id="@+id/container2"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_alignParentBottom="true"
+
+        >
+
+
+        <EditText
+            android:id="@+id/textInputEditText"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:hint="@string/username" />
+
+        <EditText
+            android:id="@+id/editText"
+
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputEditText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/editText"
+            android:layout_centerHorizontal="true"
+
+            android:layout_marginBottom="10dp"
+            android:text="Don't have and account?" />
+
+        <Button
+            android:id="@+id/buttonSignUp"
+
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="144dp"
+
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView4"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="0dp"
+            android:backgroundTint="#394C8A"
+            android:backgroundTintMode="src_over"
+            android:fontFamily="serif"
+            android:lineSpacingExtra="8sp"
+            android:text="Sign up"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:typeface="sans"/>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

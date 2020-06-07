@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PorosiaOnline</string>
+
+    <!-- Added by Adem-->
+
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="title_activity_maps">Map</string>
+
+</resources>
