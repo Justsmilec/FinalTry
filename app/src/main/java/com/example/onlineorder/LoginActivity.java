@@ -1,20 +1,43 @@
 package com.example.onlineorder;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,6 +53,8 @@ public class LoginActivity extends AppCompatActivity {
     RelativeLayout contentView;
     RelativeLayout.LayoutParams relativeParams;
     boolean isKeyboardShown = false;
+
+    public static SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +80,125 @@ public class LoginActivity extends AppCompatActivity {
         set_spannable();
         myChange(contentView);
 
+        session = new SessionManager(getApplicationContext());
+        session.checkLogin();
+        login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Task(username,password,LoginActivity.this).execute();
+            }
+        });
+
         relativeParams = (RelativeLayout.LayoutParams) container.getLayoutParams();
+    }
+
+
+    static public class Task extends AsyncTask<String,String,String> {
+        boolean isLoggedin = true;
+        Connection conn = null;
+        Statement stm = null;
+        String username_string;
+        String password_string;
+        EditText username, password;
+        ResultSet res = null;
+        Context context;
+        Activity activity = (Activity) context;
+        public Task(EditText username_edt,EditText password_edt,Context _context){
+            this.username = username_edt;
+            this.password = password_edt;
+            this.context = _context;
+        }
+
+        @Override
+        protected  void onPreExecute()
+        {
+            super.onPreExecute();
+            username_string = username.getText().toString();
+            password_string = password.getText().toString();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            try {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                conn = DriverManager.getConnection("jdbc:mysql://10.0.2.2/user_data","root","12345elb");
+                stm = conn.createStatement();
+
+                if(username_string != "" && password_string != "")
+                {
+                    res = stm.executeQuery("select * from new_user where user_name like  '" + username_string + "' AND user_password like '"+ password_string +"'");
+                    if(!res.isBeforeFirst())
+                    {
+                        isLoggedin = false;
+                    }
+                    else
+                    {
+                        isLoggedin = true;
+                        session.createLoginSession(username_string,password_string);
+                    }
+                }
+                else
+                {
+                    isLoggedin = false;
+                }
+
+                conn.close();
+            }
+
+            catch (Exception e)
+            {
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String message) {
+            //change_margin();
+
+            if(isLoggedin)
+
+            {
+                alertView("Succesfully loggedin",context);
+                Intent i = new Intent(context, MainActivity.class);
+                // Closing all the Activities
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                // Add new Flag to start new Activity
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                // Staring Login Activity
+                context.startActivity(i);
+
+            }
+
+            else
+            {
+                if(username_string == "" || password_string == "")
+                    alertView("Ploteso",context);
+                else
+                    alertView("Not logged in",context);
+            }
+        }
+
+
+        private void alertView(String message,Context context) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+            dialog.setTitle( "Hello" )
+
+                    .setMessage(message)
+//     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//      public void onClick(DialogInterface dialoginterface, int i) {
+//          dialoginterface.cancel();
+//          }})
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialoginterface, int i) {
+                        }
+                    })
+                    .create()
+                    .show();
+        }
     }
 
 
@@ -88,7 +231,7 @@ public class LoginActivity extends AppCompatActivity {
                         int heightDiff = (int)(contentView1.getRootView().getHeight()/ratioY) - (int)(contentView1.getHeight()/ratioY);
 
                         if (heightDiff > 250/ratioY) {
-                            System.out.println("HAPUR");
+
                             isKeyboardShown = true;
 
                         } else {

@@ -1,14 +1,21 @@
 package com.example.onlineorder;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +28,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static com.example.onlineorder.LoginActivity.ratioY;
+import static com.example.onlineorder.LoginActivity.session;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -32,10 +40,13 @@ public class SignUpActivity extends AppCompatActivity {
     Statement stm1 = null;
     Statement check_ifExist = null;
     ResultSet res;
+    TextView txt_span;
     boolean isKeyboardShown = false;
     RelativeLayout contentView;
     RelativeLayout container;
     RelativeLayout.LayoutParams relativeParams1;
+
+    public  static String OrderingUser = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +57,9 @@ public class SignUpActivity extends AppCompatActivity {
         userpassword = (EditText) findViewById(R.id.editText);
         contentView = (RelativeLayout) findViewById(R.id.contentView);
         container = (RelativeLayout) findViewById(R.id.container2);
+        txt_span = (TextView) findViewById(R.id.textView4);
         relativeParams1 = (RelativeLayout.LayoutParams) container.getLayoutParams();
-
+        set_spannable();
         Timer timer1 = new Timer();
         timer1.schedule(new SayHello(), 0, 10);
 
@@ -56,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                new Task().execute();
+                new Task(SignUpActivity.this).execute();
             }
 
 
@@ -68,20 +80,26 @@ public class SignUpActivity extends AppCompatActivity {
     class Task extends AsyncTask<String, String, String> {
         public String message;
         boolean error = false;
+        String str_username = username.getText().toString();
+        String str_password = userpassword.getText().toString();
 
+        ResultSet res = null;
+        Context context;
 
+        public Task(Context _context){
+            this.context = _context;
+        }
         protected void onPreExecute()
         {
             super.onPreExecute();
             System.out.println("dsfdsfdg");
-            str_username = username.getText().toString();
-            str_password = userpassword.getText().toString();
+
         }
 
 
         @Override
         protected String doInBackground(String... strings) {
-
+            SignUpActivity.OrderingUser = str_username;
             try {
 
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -103,6 +121,7 @@ public class SignUpActivity extends AppCompatActivity {
                     if (str_username != "" && str_password != "") {
 
                         stm1.executeUpdate("INSERT INTO luarasi_table (user_name,user_password) VALUES ('" + str_username + "','" + str_password + "')");
+                        session.createLoginSession(str_username,str_password);
                         error = false;
                         conn1.close();
 
@@ -146,7 +165,19 @@ public class SignUpActivity extends AppCompatActivity {
                 alertView(message);
             }
             else
-                System.out.println("No Error");
+            {
+                // user is not logged in redirect him to Login Activity
+                Intent i = new Intent(context, MainActivity.class);
+                // Closing all the Activities
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                // Add new Flag to start new Activity
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                // Staring Login Activity
+                context.startActivity(i);
+                finish();
+            }
 
         }
     }
@@ -171,6 +202,15 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
+
+    public void set_spannable(){
+        String value = "<html>Have an account?<span style = 'color:blue; font-size:20px'>Login</span></html>";
+        txt_span.setText(Html.fromHtml(value));
+        SpannableString my_str =  new SpannableString(txt_span.getText());
+        my_str.setSpan(new ClickableText(getApplicationContext(),LoginActivity.class), 16, 21, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        txt_span.setText(my_str);
+        txt_span.setMovementMethod(LinkMovementMethod.getInstance());
+    }
     public void change_margin()
     {
         runOnUiThread(new Runnable() {
