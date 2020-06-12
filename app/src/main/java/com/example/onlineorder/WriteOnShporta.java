@@ -26,8 +26,11 @@ public class WriteOnShporta extends AsyncTask<String,String,String> {
     public ArrayList<String> productName = new ArrayList<>();
     public ArrayList<Integer> sasia = new ArrayList<>();
     public ArrayList<Double> cmimi = new ArrayList<>();
+    public ArrayList<Double> total_ = new ArrayList<>();
 
-    public double total;
+
+
+    public double total = 0;
 
 
 
@@ -45,6 +48,7 @@ public class WriteOnShporta extends AsyncTask<String,String,String> {
 
     @Override
     protected String doInBackground(String... strings) {
+
 
         try {
 
@@ -80,6 +84,9 @@ res = check_ifExist.executeQuery("select * from luarasi_table where user_name li
                     productName.add(resfromProduct.getString("product_name"));
                     sasia.add(resfromProduct.getInt("product_amount"));
                     cmimi.add(resfromProduct.getDouble("product_price"));
+                    total_.add(resfromProduct.getDouble("product_total"));
+
+                    total+=resfromProduct.getInt("product_amount")*resfromProduct.getDouble("product_price");
 
                 }
                 System.out.println(resfromProduct.getRow());
@@ -111,10 +118,9 @@ res = check_ifExist.executeQuery("select * from luarasi_table where user_name li
 
     @Override
     protected void onPostExecute(String message) {
-        String str = "";
-        //str+=productName.get(1);
-        //str+=" "+cmimi.get(1);
-        //str+=" "+sasia.get(1);
-        ShportaActivity.write(productName,sasia,cmimi);
+
+
+        ShportaActivity.write(productName,sasia,cmimi,total_,total);
+
     }
 }

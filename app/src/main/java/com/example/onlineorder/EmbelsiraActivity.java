@@ -28,6 +28,7 @@ public class EmbelsiraActivity extends AppCompatActivity {
     public TextView edit_count_p3;
     public TextView edit_count_p4;
 
+    public ImageView openShporta;
     public Button orderButton;
 
     public ArrayList<LinearLayout> CheckingElement = new ArrayList<>();
@@ -43,6 +44,7 @@ public class EmbelsiraActivity extends AppCompatActivity {
         LinearLayout elementp3 = (LinearLayout) findViewById(R.id.elementp3);
         LinearLayout elementp4 = (LinearLayout) findViewById(R.id.elementp4);
         LinearLayout shporta = (LinearLayout) findViewById(R.id.linearLayout10);
+        openShporta = (ImageView) findViewById(R.id.button_menu_2);
 
         CheckingElement.add(elementp1);
         CheckingElement.add(elementp2);
@@ -50,10 +52,11 @@ public class EmbelsiraActivity extends AppCompatActivity {
         CheckingElement.add(elementp4);
 
         orderButton = (Button) findViewById(R.id.button5);
-        shporta.setOnClickListener(new View.OnClickListener() {
+        openShporta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(view.getContext(), ShportaActivity.class));
+
                 overridePendingTransition(0,0);
 
             }
