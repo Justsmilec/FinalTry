@@ -31,7 +31,7 @@ public class EmbelsiraActivity extends AppCompatActivity {
     public Button orderButton;
 
     public ArrayList<LinearLayout> CheckingElement = new ArrayList<>();
-
+    public LinearLayout shporta;
 
 
     @Override
@@ -42,12 +42,22 @@ public class EmbelsiraActivity extends AppCompatActivity {
         LinearLayout elementp2 = (LinearLayout) findViewById(R.id.elementp2);
         LinearLayout elementp3 = (LinearLayout) findViewById(R.id.elementp3);
         LinearLayout elementp4 = (LinearLayout) findViewById(R.id.elementp4);
+        LinearLayout shporta = (LinearLayout) findViewById(R.id.linearLayout10);
+
         CheckingElement.add(elementp1);
         CheckingElement.add(elementp2);
         CheckingElement.add(elementp3);
         CheckingElement.add(elementp4);
 
         orderButton = (Button) findViewById(R.id.button5);
+        shporta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(view.getContext(), ShportaActivity.class));
+                overridePendingTransition(0,0);
+
+            }
+        });
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

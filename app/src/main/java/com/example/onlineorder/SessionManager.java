@@ -63,7 +63,7 @@ public class SessionManager extends AppCompatActivity {
             _context.startActivity(i);
         }
 
-        else
+       /* else
         {
             // user is not logged in redirect him to Login Activity
             Intent i = new Intent(_context, LoginActivity.class);
@@ -75,7 +75,7 @@ public class SessionManager extends AppCompatActivity {
 
             // Staring Login Activity
             _context.startActivity(i);
-        }
+        }*/
 
 
     }

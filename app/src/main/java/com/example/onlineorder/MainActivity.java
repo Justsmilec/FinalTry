@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     public static float ratioX;
     public static float ratioY;
 
-    public LinearLayout fastfood,Sallata,Embelsira,Pije,mish,pica,pasta,antiPasta,menu_kryesore;
+    public LinearLayout fastfood,Sallata,Embelsira,Pije,mish,pica,pasta,antiPasta,menu_kryesore,shporta;
     public ImageView clickOnMenu;
 
 
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         pasta = (LinearLayout) findViewById(R.id.linearLayout7);
         antiPasta = (LinearLayout) findViewById(R.id.linearLayout8);
         menu_kryesore = (LinearLayout) findViewById(R.id.albania);
+        shporta=(LinearLayout) findViewById(R.id.linearLayout10);
 
         //**Added
         clickOnMenu = (ImageView) findViewById(R.id.buttonMenu);
@@ -58,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(view.getContext(), EmbelsiraActivity.class));
+                overridePendingTransition(0,0);
+
+            }
+        });
+        shporta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(view.getContext(), ShportaActivity.class));
                 overridePendingTransition(0,0);
 
             }

@@ -14,11 +14,13 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -42,9 +44,9 @@ public class SignUpActivity extends AppCompatActivity {
     ResultSet res;
     TextView txt_span;
     boolean isKeyboardShown = false;
-    RelativeLayout contentView;
-    RelativeLayout container;
-    RelativeLayout.LayoutParams relativeParams1;
+    ConstraintLayout contentView;
+    LinearLayout container;
+
 
     public  static String OrderingUser = "";
 
@@ -55,10 +57,9 @@ public class SignUpActivity extends AppCompatActivity {
         buttonSignUp = (Button) findViewById(R.id.buttonSignUp);
         username = (EditText) findViewById(R.id.textInputEditText);
         userpassword = (EditText) findViewById(R.id.editText);
-        contentView = (RelativeLayout) findViewById(R.id.contentView);
-        container = (RelativeLayout) findViewById(R.id.container2);
+        contentView = (ConstraintLayout) findViewById(R.id.contentView);
+        container = (LinearLayout) findViewById(R.id.container2);
         txt_span = (TextView) findViewById(R.id.textView4);
-        relativeParams1 = (RelativeLayout.LayoutParams) container.getLayoutParams();
         set_spannable();
         Timer timer1 = new Timer();
         timer1.schedule(new SayHello(), 0, 10);
@@ -198,41 +199,20 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 }
             });
-            change_margin();
+
         }
     }
 
 
     public void set_spannable(){
-        String value = "<html>Have an account?<span style = 'color:blue; font-size:20px'>Login</span></html>";
+        String value = "<html>I have an account.<span style = 'color:blue; font-size:20px'> Sign In</span></html>";
         txt_span.setText(Html.fromHtml(value));
         SpannableString my_str =  new SpannableString(txt_span.getText());
-        my_str.setSpan(new ClickableText(getApplicationContext(),LoginActivity.class), 16, 21, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        my_str.setSpan(new ClickableText(getApplicationContext(),LoginActivity.class), 18, 26, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         txt_span.setText(my_str);
         txt_span.setMovementMethod(LinkMovementMethod.getInstance());
     }
-    public void change_margin()
-    {
-        runOnUiThread(new Runnable() {
 
-            @Override
-            public void run() {
-
-                // Stuff that updates the UI
-                if(isKeyboardShown)
-                {
-                    relativeParams1.setMargins(0, 0, 0, (int)(-10/ratioY));  // left, top, right, bottom
-                    container.setLayoutParams(relativeParams1);
-                }
-                else {
-                    //title.setVisibility(View.VISIBLE);
-                    relativeParams1.setMargins(0, 0, 0, (int)(400/ratioY));  // left, top, right, bottom
-                    container.setLayoutParams(relativeParams1);
-                }
-            }
-        });
-
-    }
 
 
 }

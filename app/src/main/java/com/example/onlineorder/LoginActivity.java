@@ -17,11 +17,13 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -49,9 +51,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView txt_span, title,te;
     Button login_button;
     static EditText username, password;
-    RelativeLayout container;
-    RelativeLayout contentView;
-    RelativeLayout.LayoutParams relativeParams;
+    LinearLayout container;
+    ConstraintLayout contentView;
     boolean isKeyboardShown = false;
 
     public static SessionManager session;
@@ -73,15 +74,15 @@ public class LoginActivity extends AppCompatActivity {
         username = (EditText) findViewById(R.id.textInputEditText);
         login_button = (Button) findViewById(R.id.button2);
         txt_span = (TextView) findViewById(R.id.textView4);
-        container = (RelativeLayout) findViewById(R.id.container);
-        contentView = (RelativeLayout) findViewById(R.id.contentView);
+        container = (LinearLayout) findViewById(R.id.container);
+        contentView = (ConstraintLayout) findViewById(R.id.contentView);
         title = (TextView) findViewById(R.id.textView3);
         te = (TextView) findViewById(R.id.textView22);
         set_spannable();
-        myChange(contentView);
+
 
         session = new SessionManager(getApplicationContext());
-        session.checkLogin();
+       session.checkLogin();
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +90,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        relativeParams = (RelativeLayout.LayoutParams) container.getLayoutParams();
     }
 
 
@@ -122,12 +122,12 @@ public class LoginActivity extends AppCompatActivity {
 
             try {
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
-                conn = DriverManager.getConnection("jdbc:mysql://10.0.2.2/user_data","root","12345elb");
+                conn = DriverManager.getConnection("jdbc:mysql://10.0.2.2/luarasi","root","12345elb");
                 stm = conn.createStatement();
 
                 if(username_string != "" && password_string != "")
                 {
-                    res = stm.executeQuery("select * from new_user where user_name like  '" + username_string + "' AND user_password like '"+ password_string +"'");
+                    res = stm.executeQuery("select * from luarasi_table where user_name like  '" + username_string + "' AND user_password like '"+ password_string +"'");
                     if(!res.isBeforeFirst())
                     {
                         isLoggedin = false;
@@ -203,10 +203,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void set_spannable(){
-        String value = "<html>Don't have an account?<span style = 'color:blue; font-size:15px'>Sign Up</span></html>";
+        String value = "<html>Don't have an account?<span style = 'color:blue; font-size:15px'> Sign Up</span></html>";
         txt_span.setText(Html.fromHtml(value));
         SpannableString my_str =  new SpannableString(txt_span.getText());
-        my_str.setSpan(new ClickableText(getApplicationContext(),SignUpActivity.class), 22, 29, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        my_str.setSpan(new ClickableText(getApplicationContext(),SignUpActivity.class), 22, 30, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         txt_span.setText(my_str);
         txt_span.setMovementMethod(LinkMovementMethod.getInstance());
     }
@@ -240,7 +240,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
-                change_margin();
+
             }
         }
         Timer timer = new Timer();
@@ -248,23 +248,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void change_margin()
-    {
-        runOnUiThread(new Runnable() {
 
-            @Override
-            public void run() {
 
-                if(isKeyboardShown)
-                {
-                    relativeParams.setMargins(0, 0, 0, (int)(-50/ratioY));  // left, top, right, bottom
-                    container.setLayoutParams(relativeParams);
-                }
-                else {
-                    relativeParams.setMargins(0, 0, 0, (int)(400/ratioY));  // left, top, right, bottom
-                    container.setLayoutParams(relativeParams);
-                }
-            }
-        });
-    }
 }
