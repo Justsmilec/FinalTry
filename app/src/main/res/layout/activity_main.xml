@@ -159,7 +159,7 @@
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="30dp"
-                        android:text="    Porosit pijen tende!"
+                        android:text="    Order your drink!"
                         android:textColor="#ffffff"
                         android:textSize="15sp" />
 
@@ -221,7 +221,7 @@
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="30dp"
-                        android:text="    Porosit pijen tende!"
+                        android:text="    Order your sweets!"
                         android:textColor="#ffffff"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -282,7 +282,7 @@
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="30dp"
-                        android:text="    Porosit pijen tende!"
+                        android:text="    Order your salad!"
                         android:textColor="#ffffff"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -342,7 +342,7 @@
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="30dp"
-                        android:text="    Porosit pijen tende!"
+                        android:text="    Order your meat!"
                         android:textColor="#ffffff"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -402,7 +402,7 @@
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="30dp"
-                        android:text="    Porosit pijen tende!"
+                        android:text="    Order your fastfood!"
                         android:textColor="#ffffff"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -462,7 +462,7 @@
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="30dp"
-                        android:text="    Porosit pijen tende!"
+                        android:text="    Order your Pizza!"
                         android:textColor="#ffffff"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -522,7 +522,7 @@
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="30dp"
-                        android:text="    Porosit pijen tende!"
+                        android:text="    Order your Pasta!"
                         android:textColor="#ffffff"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -582,7 +582,7 @@
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="30dp"
-                        android:text="    Porosit pijen tende!"
+                        android:text="    Order your Antipasta!"
                         android:textColor="#ffffff"
                         android:textSize="15sp" />
                 </LinearLayout>
