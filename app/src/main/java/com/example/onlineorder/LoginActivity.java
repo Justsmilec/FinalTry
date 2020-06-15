@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         session = new SessionManager(getApplicationContext());
-       //session.checkLogin();
+        //session.checkLogin();
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -6,7 +6,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShportaActivity">
+    tools:context=".InfoActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout12"
@@ -94,7 +94,7 @@
 
 
             <TextView
-                    android:id="@+id/your_cart"
+                    android:id="@+id/info"
 
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
@@ -102,7 +102,7 @@
                     android:gravity="center_vertical|center_horizontal"
 
 
-                    android:text="YOUR CART"
+                    android:text="PROFILE"
                     android:textColor="#000000"
 
 
@@ -117,107 +117,28 @@
                     android:id="@+id/scrollView2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent">
 
-<!--                    <ScrollView-->
-<!--                        android:id="@+id/scrollid"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_marginTop="10dp"-->
-<!--                        android:gravity="center_horizontal"-->
+                  <TextView
+                      android:layout_width="380dp"
+                      android:layout_height="wrap_content"
+                      android:gravity="center_horizontal"
+                      android:textSize="25sp"
+                      android:background="@drawable/checkout_background"
 
-<!--                        android:orientation="vertical">-->
-
-<!--                        <LinearLayout-->
-<!--                            android:id="@+id/elementp1"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="100dp"-->
-<!--                            android:layout_marginHorizontal="10dp"-->
-<!--                            android:background="@drawable/checkout_background"-->
-<!--                            android:gravity="center_horizontal"-->
-<!--                            android:orientation="vertical"-->
-
-
-<!--                            >-->
-
-<!--                            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:orientation="horizontal">-->
-
-<!--                                <TextView-->
-<!--                                    android:id="@+id/writeFromDB1"-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="match_parent"-->
-<!--                                    android:text="  Coca-Cola"-->
-<!--                                    android:textColor="#ffffff"-->
-<!--                                    android:textSize="20sp"-->
-<!--                                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                                    tools:ignore="MissingConstraints">-->
-
-<!--                                </TextView>-->
-
-<!--                                <LinearLayout-->
-
-<!--                                    android:layout_width="50dp"-->
-<!--                                    android:layout_height="40dp"-->
-<!--                                    android:orientation="horizontal"-->
-<!--                                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                                    tools:ignore="MissingConstraints">-->
-
-<!--                                    <TextView-->
-<!--                                        android:id="@+id/writeFromDB2"-->
-<!--                                        android:layout_width="match_parent"-->
-
-<!--                                        android:layout_height="match_parent"-->
-<!--                                        android:gravity="center"-->
-<!--                                        android:text="0"-->
-<!--                                        android:textColor="#ffffff"-->
-<!--                                        android:textSize="25sp">-->
-
-<!--                                    </TextView>-->
-
-<!--                                </LinearLayout>-->
-<!--                            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--                            <LinearLayout-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="match_parent"-->
-<!--                                android:orientation="vertical">-->
-
-<!--                                <LinearLayout-->
-<!--                                    android:layout_width="match_parent"-->
-<!--                                    android:layout_height="match_parent"-->
-<!--                                    android:orientation="vertical">-->
-
-<!--                                    <TextView-->
-<!--                                        android:layout_width="match_parent"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:gravity="center"-->
-<!--                                        android:text="TOTAL"-->
-<!--                                        android:textColor="#ffffff"-->
-<!--                                        android:textSize="15sp">-->
-
-<!--                                    </TextView>-->
-
-<!--                                    <TextView-->
-<!--                                        android:layout_width="match_parent"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:gravity="center"-->
-<!--                                        android:text="$3"-->
-<!--                                        android:textColor="#ffffff"-->
-<!--                                        android:textSize="20sp">-->
-
-<!--                                    </TextView>-->
-
-
-<!--                                </LinearLayout>-->
-<!--                            </LinearLayout>-->
-
-<!--                        </LinearLayout>-->
-
+android:text="USERNAME">
+                  </TextView>
+                    <TextView
+                        android:id="@+id/username"
+                        android:layout_width="380dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:textSize="20sp"
+                        android:text="USERNAME">
+                    </TextView>
 
                 </LinearLayout>
 
@@ -236,73 +157,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
 
-                        <LinearLayout
-                            android:id="@+id/order_button"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginBottom="5dp"
-                            android:background="#ffffff"
-                            android:orientation="horizontal"
-                            app:layout_constraintBottom_toTopOf="@id/menu_footer"
 
-                            >
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:ignore="MissingConstraints">
-
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="TOTAL"
-                                        android:textColor="#000000"
-                                        android:textSize="15sp">
-
-                                    </TextView>
-
-                                    <TextView
-                                        android:id="@+id/total_cmim"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="$100"
-                                        android:textColor="#000000"
-                                        android:textSize="20sp">
-
-                                    </TextView>
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    tools:ignore="MissingConstraints">
-
-                                    <Button
-                                        android:id="@+id/button5"
-                                        android:layout_width="200dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginRight="20dp"
-                                        android:background="@drawable/lineari_kryesor7"
-                                        android:text="CHECKOUT"
-                                        android:textColor="#ffffff"
-
-
-                                        />
-
-                                </LinearLayout>
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-                        </LinearLayout>
 
 
                         <LinearLayout
@@ -349,7 +204,7 @@
                                     android:layout_height="match_parent"
                                     android:gravity="center_horizontal"
                                     android:orientation="horizontal"
-
+                                    android:onClick="goShporta"
                                     app:layout_constraintEnd_toStartOf="@+id/linearLayout11"
                                     app:layout_constraintStart_toEndOf="@+id/linearLayout9">
 

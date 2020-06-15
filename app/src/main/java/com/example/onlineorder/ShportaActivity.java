@@ -3,10 +3,12 @@ package com.example.onlineorder;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Scroller;
@@ -23,6 +25,7 @@ public class ShportaActivity extends AppCompatActivity {
     public static LinearLayout ln,myln;
     public static LinearLayout bigcontainer;
     public static Context context;
+    public Button checkout_button;
     public static TextView total_cmim;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +38,24 @@ public class ShportaActivity extends AppCompatActivity {
         bigcontainer = (LinearLayout) findViewById(R.id.scrollView2);
 
 
+        checkout_button = (Button) findViewById(R.id.button5);
 
-        String actualUser = LoginActivity.session.getUserDetails().get(KEY_NAME).toString();
+        final String actualUser = LoginActivity.session.getUserDetails().get(KEY_NAME).toString();
         System.out.println(actualUser);
         WriteOnShporta writeOnShporta = new WriteOnShporta(actualUser);
         writeOnShporta.execute();
         System.out.println("88sdfsfsdf " + prd);
         //write.setText(prd);
+        checkout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Checkout_reset checkout_reset = new Checkout_reset("cani");
+                checkout_reset.execute();
+
+                ShowMessage.alertView("Success", "CHECKOUT",context);
+            }
+        });
 
     }
 
@@ -60,6 +74,35 @@ public class ShportaActivity extends AppCompatActivity {
         }
 
         total_cmim.setText("$"+Double.toString(total));
+
+    }
+    public void goBack(View view){
+
+        super.onBackPressed();
+        overridePendingTransition(0,0);
+
+
+
+    }
+    public void goHome(View view) {
+
+        startActivity(new Intent(view.getContext(), MainActivity.class));
+        overridePendingTransition(0, 0);
+
+
+    }
+    public void goMenu(View view) {
+
+        startActivity(new Intent(view.getContext(), MenuActivity.class));
+        overridePendingTransition(0, 0);
+
+
+    }
+    public void goProfile(View view) {
+
+        startActivity(new Intent(view.getContext(), ProfileActivity.class));
+        overridePendingTransition(0, 0);
+
 
     }
 }

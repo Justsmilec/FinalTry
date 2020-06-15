@@ -4,6 +4,7 @@ package com.example.onlineorder;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,10 +20,11 @@ public class EmbelsiraActivity extends AppCompatActivity {
     public ImageView clickOnMenu;
     public ImageView plus;
     public ImageView minus;
-    int number_p1=0;
-    int number_p2=0;
-    int number_p3=0;
-    int number_p4=0;
+    int number_p1 = 0;
+    int number_p2 = 0;
+    int number_p3 = 0;
+    int number_p4 = 0;
+    public ImageView menu_activity;
     public TextView edit_count_p1;
     public TextView edit_count_p2;
     public TextView edit_count_p3;
@@ -30,7 +32,7 @@ public class EmbelsiraActivity extends AppCompatActivity {
 
     public ImageView openShporta;
     public Button orderButton;
-
+    private Context context;
     public ArrayList<LinearLayout> CheckingElement = new ArrayList<>();
     public LinearLayout shporta;
 
@@ -39,12 +41,13 @@ public class EmbelsiraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_embelsira);
+        this.context=this;
         LinearLayout elementp1 = (LinearLayout) findViewById(R.id.elementp1);
         LinearLayout elementp2 = (LinearLayout) findViewById(R.id.elementp2);
         LinearLayout elementp3 = (LinearLayout) findViewById(R.id.elementp3);
         LinearLayout elementp4 = (LinearLayout) findViewById(R.id.elementp4);
         LinearLayout shporta = (LinearLayout) findViewById(R.id.linearLayout10);
-        openShporta = (ImageView) findViewById(R.id.button_menu_2);
+        menu_activity = (ImageView) findViewById(R.id.button_menu_2);
 
         CheckingElement.add(elementp1);
         CheckingElement.add(elementp2);
@@ -52,12 +55,12 @@ public class EmbelsiraActivity extends AppCompatActivity {
         CheckingElement.add(elementp4);
 
         orderButton = (Button) findViewById(R.id.button5);
-        openShporta.setOnClickListener(new View.OnClickListener() {
+        menu_activity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), ShportaActivity.class));
+                startActivity(new Intent(view.getContext(), MenuActivity.class));
 
-                overridePendingTransition(0,0);
+                overridePendingTransition(0, 0);
 
             }
         });
@@ -66,19 +69,18 @@ public class EmbelsiraActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                for(int i = 0;i<CheckingElement.size();i++){
+                for (int i = 0; i < CheckingElement.size(); i++) {
                     ElementManager.getElementData(CheckingElement.get(i));
-                        if(ElementManager.sasia != 0)
-                        {
-                            String procutName = ElementManager.productName;
-                            int sasia = ElementManager.sasia;
-                            double cmimi = ElementManager.cmimi;
+                    if (ElementManager.sasia != 0) {
+                        String procutName = ElementManager.productName;
+                        int sasia = ElementManager.sasia;
+                        double cmimi = ElementManager.cmimi;
 
-                            WriteOrder writeOrder = new WriteOrder(procutName,cmimi,sasia,SignUpActivity.OrderingUser);
-                            writeOrder.execute();
-                        }
+                        WriteOrder writeOrder = new WriteOrder(procutName, cmimi, sasia, SignUpActivity.OrderingUser);
+                        writeOrder.execute();
+                    }
                 }
-
+ShowMessage.alertView("Success", "Order",context);
             }
         });
 
@@ -99,8 +101,6 @@ public class EmbelsiraActivity extends AppCompatActivity {
         plus.setOnClickListener(new View.OnClickListener() {
 
 
-
-
             public void onClick(View v) {
                 edit_count_p1.setText("" + ++number_p1);
 
@@ -115,10 +115,8 @@ public class EmbelsiraActivity extends AppCompatActivity {
         minus.setOnClickListener(new View.OnClickListener() {
 
 
-
-
             public void onClick(View v) {
-                if(number_p1>0) {
+                if (number_p1 > 0) {
                     edit_count_p1.setText("" + --number_p1);
                 }
 
@@ -135,8 +133,6 @@ public class EmbelsiraActivity extends AppCompatActivity {
         plus.setOnClickListener(new View.OnClickListener() {
 
 
-
-
             public void onClick(View v) {
                 edit_count_p2.setText("" + ++number_p2);
 
@@ -151,10 +147,8 @@ public class EmbelsiraActivity extends AppCompatActivity {
         minus.setOnClickListener(new View.OnClickListener() {
 
 
-
-
             public void onClick(View v) {
-                if(number_p2>0) {
+                if (number_p2 > 0) {
                     edit_count_p2.setText("" + --number_p2);
                 }
 
@@ -171,8 +165,6 @@ public class EmbelsiraActivity extends AppCompatActivity {
         plus.setOnClickListener(new View.OnClickListener() {
 
 
-
-
             public void onClick(View v) {
                 edit_count_p3.setText("" + ++number_p3);
 
@@ -187,10 +179,8 @@ public class EmbelsiraActivity extends AppCompatActivity {
         minus.setOnClickListener(new View.OnClickListener() {
 
 
-
-
             public void onClick(View v) {
-                if(number_p3>0) {
+                if (number_p3 > 0) {
                     edit_count_p3.setText("" + --number_p3);
                 }
 
@@ -207,8 +197,6 @@ public class EmbelsiraActivity extends AppCompatActivity {
         plus.setOnClickListener(new View.OnClickListener() {
 
 
-
-
             public void onClick(View v) {
                 edit_count_p4.setText("" + ++number_p4);
 
@@ -223,10 +211,8 @@ public class EmbelsiraActivity extends AppCompatActivity {
         minus.setOnClickListener(new View.OnClickListener() {
 
 
-
-
             public void onClick(View v) {
-                if(number_p4>0) {
+                if (number_p4 > 0) {
                     edit_count_p4.setText("" + --number_p4);
                 }
 
@@ -241,19 +227,33 @@ public class EmbelsiraActivity extends AppCompatActivity {
     }
 
 
-
-
-
-    public void goBack(View view){
+    public void goBack(View view) {
 
         super.onBackPressed();
-        overridePendingTransition(0,0);
-
+        overridePendingTransition(0, 0);
 
 
     }
 
+    public void goHome(View view) {
+
+        startActivity(new Intent(view.getContext(), MainActivity.class));
+        overridePendingTransition(0, 0);
 
 
+    }
+    public void goShporta(View view) {
 
+        startActivity(new Intent(view.getContext(), ShportaActivity.class));
+        overridePendingTransition(0, 0);
+
+
+    }
+    public void goProfile(View view) {
+
+        startActivity(new Intent(view.getContext(), ProfileActivity.class));
+        overridePendingTransition(0, 0);
+
+
+    }
 }

@@ -681,6 +681,7 @@
 
 
             <LinearLayout
+                android:onClick="goHome"
                 android:id="@+id/linearLayout9"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
@@ -690,7 +691,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
-                    android:onClick="goBack"
+
 
                     android:layout_width="25dp"
                     android:layout_height="25dp"
@@ -703,6 +704,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:onClick="goShporta"
+
                 android:id="@+id/linearLayout10"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -740,6 +743,7 @@
                     android:layout_height="30dp"
                     android:orientation="horizontal"
                     android:gravity="center"
+                    android:onClick="goProfile"
 
                     android:background="@drawable/profile_image"
 

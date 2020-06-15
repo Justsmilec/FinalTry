@@ -198,5 +198,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void goHome(View view) {
 
+        startActivity(new Intent(view.getContext(), MainActivity.class));
+        overridePendingTransition(0, 0);
+
+
+    }
+    public void goProfile(View view) {
+
+        startActivity(new Intent(view.getContext(), ProfileActivity.class));
+        overridePendingTransition(0, 0);
+
+
+    }
 }

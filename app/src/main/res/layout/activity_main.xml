@@ -51,28 +51,6 @@
             >
 
             <LinearLayout
-                android:id="@+id/english"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginRight="20dp"
-                android:gravity="right"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/button2"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/languagebackground"
-                    app:srcCompat="@drawable/user_"
-
-
-                    />
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/albania"
                 android:layout_width="wrap_content"
 
@@ -639,6 +617,7 @@
 
 
             <LinearLayout
+                android:onClick="goHome"
                 android:id="@+id/linearLayout9"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
@@ -647,6 +626,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
+
 
                     android:layout_width="25dp"
                     android:layout_height="25dp"
@@ -696,7 +676,7 @@
                     android:layout_height="30dp"
                     android:orientation="horizontal"
                     android:gravity="center"
-
+                    android:onClick="goProfile"
                     android:background="@drawable/profile_image"
 
 
